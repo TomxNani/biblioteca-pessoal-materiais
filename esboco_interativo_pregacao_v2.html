@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>A fé que permanece no vale — Esboço interativo</title>
+<style>
+:root{--purple:#7C3AED;--purple-dark:#5B21B6;--orange:#F97316;--blue:#2563EB;--teal:#0891B2;--ink:#101014;--muted:#666572;--line:#E5E1EC;--paper:#fff;--soft:#F7F4FF}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--paper);scroll-padding-top:90px}
+body{margin:0 auto;max-width:780px;padding:0 20px 110px;color:var(--ink);background:var(--paper);font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.48;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}
+.top-progress{position:fixed;top:0;left:0;width:100%;height:4px;background:#EEEAF5;z-index:30}
+.top-progress span{display:block;height:100%;width:0;background:var(--purple);transition:width .25s ease}
+.toolbar{position:sticky;top:4px;z-index:20;display:flex;align-items:center;gap:7px;padding:10px 0 9px;background:#ffffffed;backdrop-filter:blur(12px);border-bottom:1px solid #eeeaf3}
+.tool-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:8px 10px;font-size:.8rem;font-weight:750;cursor:pointer;white-space:nowrap;transition:transform .15s,background .15s}
+.tool-btn:active{transform:scale(.96)}
+.tool-btn.primary{background:var(--purple);border-color:var(--purple);color:white}
+.tool-btn.active{background:var(--soft);border-color:#C4B5FD;color:var(--purple-dark)}
+.tool-spacer{flex:1}
+.progress-text{font-size:.72rem;font-weight:800;color:var(--purple);white-space:nowrap}
+header{text-align:center;padding:25px 0 14px}
+.eyebrow{margin:0 0 9px;color:var(--purple);font-size:.7rem;font-weight:900;letter-spacing:.17em;text-transform:uppercase}
+h1{margin:0 auto 10px;max-width:650px;font-size:clamp(2rem,7.5vw,3rem);line-height:1.03;letter-spacing:-.05em;font-weight:950;text-transform:uppercase}
+.subtitle{margin:0;font-size:.85rem;font-weight:850;letter-spacing:.08em}
+.meta{margin:5px 0 0;color:var(--muted);font-size:.78rem}
+.rule{height:4px;border:0;background:var(--purple);border-radius:10px;margin:17px 0}
+.rule.orange{background:var(--orange)}.rule.blue{background:var(--blue)}
+.central{padding:0 0 0 13px;border-left:4px solid var(--purple);margin:16px 0 17px}
+.label{margin:0 0 4px;color:var(--purple);font-size:.76rem;font-weight:950;letter-spacing:.07em;text-transform:uppercase}
+.central p:last-child{margin:0;font-size:1.06rem;font-weight:800;line-height:1.38}
+.scripture{margin:17px 0 21px;text-align:center;font-size:1.02rem;line-height:1.48;font-style:italic}
+.scripture cite{display:block;margin-top:5px;color:var(--purple);font-size:.82rem;font-style:normal;font-weight:900;letter-spacing:.07em}
+section{margin:0;animation:rise .45s ease both}
+@keyframes rise{from{opacity:.65;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+h2{margin:0 0 11px;text-align:center;text-transform:uppercase;font-size:clamp(1.32rem,5vw,1.75rem);line-height:1.12;letter-spacing:-.035em;font-weight:950}
+.number{color:var(--purple)}
+.verse{margin:0 0 12px;text-align:center;font-style:italic}
+.verse strong{display:block;margin-top:3px;color:var(--purple);font-size:.82rem;font-style:normal;letter-spacing:.06em}
+.tasks{list-style:none;margin:13px 0 15px;padding:0}
+.tasks li{display:grid;grid-template-columns:23px 1fr;gap:10px;align-items:start;margin:0 0 9px}
+.tasks input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:3px 0 0;border:2px solid #B8B5C2;border-radius:5px;background:#fff;cursor:pointer;position:relative;flex-shrink:0}
+.tasks input:checked{background:var(--purple);border-color:var(--purple)}
+.tasks input:checked:after{content:"";position:absolute;left:5px;top:1px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.tasks li.done .task-text{color:#7A7882;text-decoration:line-through;text-decoration-thickness:1px}
+.callout{margin:13px 0;padding:0 0 0 12px;border-left:3px solid var(--teal)}
+.callout .label{color:var(--teal)}
+.callout p:last-child{margin:0;font-style:italic}
+.transition{margin:13px 0 15px;font-size:.96rem}
+.transition strong{color:var(--purple);font-weight:950}
+.mini-table{width:100%;border-collapse:collapse;margin:12px 0 15px;font-size:.86rem}
+.mini-table th,.mini-table td{text-align:left;vertical-align:top;padding:7px 6px;border-bottom:1px solid var(--line)}
+.mini-table th{color:var(--purple);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase}
+.section-controls{display:flex;justify-content:center;margin:0 0 6px}
+.collapse-btn{border:0;background:transparent;color:var(--muted);font-size:.75rem;font-weight:750;padding:4px 10px;cursor:pointer}
+.section-body{overflow:hidden;transition:max-height .28s ease,opacity .22s ease}
+section.collapsed .section-body{display:none}
+section.collapsed .collapse-btn{color:var(--purple)}
+.closing-list{margin:10px 0 17px;padding-left:1.2rem}
+.closing-list li{margin-bottom:8px}
+.closing-list strong{color:var(--purple)}
+.final-quote{text-align:center;margin:14px 0;font-size:1.08rem;font-style:italic}
+.final-quote strong{display:block;color:var(--purple);font-size:.8rem;font-style:normal;margin-top:4px}
+.notes{border-top:3px solid var(--purple);padding-top:13px;margin-top:17px}
+.notes h2{font-size:1.2rem;margin-bottom:9px}
+.note-field{width:100%;min-height:42px;resize:vertical;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:8px 2px;background:transparent;color:var(--ink);outline:none;font-size:.94rem}
+.note-field:focus{border-bottom:2px solid var(--purple)}
+.note-field::placeholder{color:#8B8994}
+.bottom-dock{position:fixed;bottom:0;left:0;right:0;z-index:25;background:#fffffff0;backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:flex;gap:8px;justify-content:center}
+.bottom-dock button{flex:1;max-width:190px;border:0;border-radius:13px;padding:11px 9px;background:var(--ink);color:#fff;font-size:.82rem;font-weight:850}
+.bottom-dock button.secondary{background:var(--soft);color:var(--purple-dark);border:1px solid #DDD0FF}
+.timer{font-variant-numeric:tabular-nums;font-weight:900;color:var(--purple);font-size:.85rem;white-space:nowrap}
+.toast{position:fixed;left:50%;bottom:82px;transform:translate(-50%,10px);opacity:0;pointer-events:none;background:#17151D;color:#fff;padding:9px 14px;border-radius:99px;font-size:.8rem;z-index:50;transition:.2s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.focus-mode .eyebrow,.focus-mode .meta,.focus-mode .toolbar .optional,.focus-mode .notes{display:none}
+.focus-mode body{font-size:18px}
+.small-note{color:var(--muted);font-size:.72rem;text-align:center;margin:16px 0 0}
+@media(min-width:600px){body{padding-left:36px;padding-right:36px;font-size:18px}.toolbar{border-radius:0 0 12px 12px}.rule{margin:19px 0}}
+@media print{body{max-width:none;padding:10mm;font-size:11pt}.toolbar,.bottom-dock,.top-progress,.section-controls,.small-note{display:none!important}.section-body{display:block!important}.rule,.number,.label,.verse strong,.callout,.central{print-color-adjust:exact;-webkit-print-color-adjust:exact}.tasks input{appearance:auto;-webkit-appearance:auto;width:13px;height:13px}.notes{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="top-progress" aria-hidden="true"><span id="progressBar"></span></div>
+<nav class="toolbar" aria-label="Controles do esboço">
+  <button class="tool-btn" id="prevBtn" title="Ponto anterior">←</button>
+  <button class="tool-btn" id="nextBtn" title="Próximo ponto">Próximo →</button>
+  <span class="tool-spacer"></span>
+  <span class="progress-text" id="progressText">0/12</span>
+  <button class="tool-btn optional" id="focusBtn" title="Alternar modo foco">◉ Foco</button>
+</nav>
+
+<header id="top">
+  <p class="eyebrow">Esboço de pregação</p>
+  <h1>A fé que permanece no vale</h1>
+  <p class="subtitle">SALMO 23:1–6</p>
+  <p class="meta">25–30 minutos · Modelo interativo</p>
+</header>
+<hr class="rule orange">
+<div class="central">
+  <p class="label">▤ Ideia central</p>
+  <p>A fé não nega a dor. Ela aprende a atravessá-la na companhia do Pastor.</p>
+</div>
+<blockquote class="scripture">“Ainda que eu ande pelo vale da sombra da morte, não temerei mal algum, porque tu estás comigo.”<cite>Salmo 23:4</cite></blockquote>
+<hr class="rule">
+
+<section id="ponto1" data-title="01 · O vale faz parte da caminhada">
+  <h2><span class="number">01</span> · O vale faz parte da caminhada</h2>
+  <div class="section-controls"><button class="collapse-btn" aria-expanded="true">⌃ Recolher ponto</button></div>
+  <div class="section-body">
+    <p class="verse">“Ainda que eu ande pelo vale da sombra da morte...”<strong>Salmo 23:4</strong></p>
+    <ul class="tasks">
+      <li><input type="checkbox" id="t1"><span class="task-text"><strong>A fé não é ausência de sofrimento.</strong></span></li>
+      <li><input type="checkbox" id="t2"><span class="task-text">O texto não diz <em>“se eu andar”</em>, mas <strong>“ainda que eu ande”</strong>.</span></li>
+      <li><input type="checkbox" id="t3"><span class="task-text">O vale é parte do caminho, mas não precisa se tornar nossa identidade.</span></li>
+    </ul>
+    <div class="callout"><p class="label">✎ Aplicação</p><p>Não confunda atravessar um vale com ter fracassado na fé.</p></div>
+    <p class="transition"><strong>→ Transição</strong> A questão não é apenas onde estamos caminhando, mas quem está conosco.</p>
+  </div>
+</section>
+<hr class="rule">
+
+<section id="ponto2" data-title="02 · A presença de Deus muda a travessia">
+  <h2><span class="number">02</span> · A presença de Deus muda a travessia</h2>
+  <div class="section-controls"><button class="collapse-btn" aria-expanded="true">⌃ Recolher ponto</button></div>
+  <div class="section-body">
+    <p class="verse">“...porque tu estás comigo.”<strong>Salmo 23:4</strong></p>
+    <ul class="tasks">
+      <li><input type="checkbox" id="t4"><span class="task-text">A segurança do salmista não depende de controlar todas as circunstâncias.</span></li>
+      <li><input type="checkbox" id="t5"><span class="task-text">A presença de Deus não significa que o sofrimento desaparece imediatamente.</span></li>
+      <li><input type="checkbox" id="t6"><span class="task-text">O Pastor acompanha, guia e sustenta seu povo durante o caminho.</span></li>
+    </ul>
+    <table class="mini-table"><thead><tr><th>O texto não promete</th><th>A fé nos lembra</th></tr></thead><tbody><tr><td>Uma vida sem sofrimento</td><td>Deus está conosco no sofrimento</td></tr><tr><td>Controle de tudo</td><td>Podemos confiar no Pastor</td></tr></tbody></table>
+    <div class="callout"><p class="label">✎ Aplicação</p><p>“Senhor, sustenta-me e guia-me enquanto caminho.”</p></div>
+  </div>
+</section>
+<hr class="rule">
+
+<section id="ponto3" data-title="03 · O vale não anula a esperança">
+  <h2><span class="number">03</span> · O vale não anula a esperança</h2>
+  <div class="section-controls"><button class="collapse-btn" aria-expanded="true">⌃ Recolher ponto</button></div>
+  <div class="section-body">
+    <p class="verse">“Bondade e misericórdia certamente me seguirão todos os dias da minha vida...”<strong>Salmo 23:6</strong></p>
+    <ul class="tasks">
+      <li><input type="checkbox" id="t7"><span class="task-text">A dor presente não conta toda a história.</span></li>
+      <li><input type="checkbox" id="t8"><span class="task-text">Esperança bíblica não é negar a realidade, mas enfrentá-la confiando no caráter de Deus.</span></li>
+      <li><input type="checkbox" id="t9"><span class="task-text">O salmo termina com confiança no cuidado contínuo de Deus.</span></li>
+    </ul>
+    <div class="callout"><p class="label">✎ Aplicação</p><p>Não transforme uma estação dolorosa na definição de toda a sua vida.</p></div>
+  </div>
+</section>
+<hr class="rule orange">
+
+<section id="conclusao" data-title="Conclusão · Três respostas">
+  <h2>Conclusão · Três respostas</h2>
+  <div class="section-controls"><button class="collapse-btn" aria-expanded="true">⌃ Recolher ponto</button></div>
+  <div class="section-body">
+    <ul class="tasks">
+      <li><input type="checkbox" id="t10"><span class="task-text"><strong class="number">Reconheça o vale</strong> — não finja que a dor não existe.</span></li>
+      <li><input type="checkbox" id="t11"><span class="task-text"><strong class="number">Lembre-se do Pastor</strong> — você não precisa atravessar sozinho.</span></li>
+      <li><input type="checkbox" id="t12"><span class="task-text"><strong class="number">Continue caminhando</strong> — o vale é real, mas não é toda a história.</span></li>
+    </ul>
+    <blockquote class="final-quote">“Tu estás comigo.”<strong>Salmo 23:4</strong></blockquote>
+    <div class="callout"><p class="label">? Pergunta para encerrar</p><p>O que muda na maneira como atravessamos o vale quando reconhecemos quem caminha conosco?</p></div>
+  </div>
+</section>
+
+<div class="notes" id="notas">
+  <h2>▤ Notas do pregador</h2>
+  <label for="nota1" class="label">Ilustração</label><textarea id="nota1" class="note-field" rows="2" placeholder="Escreva uma ideia para a ilustração..."></textarea>
+  <label for="nota2" class="label">Frase-chave</label><textarea id="nota2" class="note-field" rows="2" placeholder="O vale é real, mas não é toda a história."></textarea>
+  <label for="nota3" class="label">Oração / apelo</label><textarea id="nota3" class="note-field" rows="2" placeholder="Anote aqui..."></textarea>
+</div>
+<p class="small-note">As caixas e notas ficam guardadas neste navegador neste dispositivo. Use “Imprimir / PDF” para criar uma cópia estática.</p>
+
+<div class="bottom-dock">
+  <button class="secondary" id="timerBtn">▶ Iniciar tempo <span class="timer" id="timer">00:00</span></button>
+  <button id="printBtn">▤ Imprimir / PDF</button>
+  <button class="secondary" id="resetBtn">↺ Reiniciar</button>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+  const $ = (s, root=document) => root.querySelector(s);
+  const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+  const KEY = 'esboco-valemobile-v2';
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) {}
+  const boxes = $$('input[type="checkbox"]');
+  const fields = $$('.note-field');
+  const toast = (msg) => {
+    const el = $('#toast'); el.textContent = msg; el.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove('show'), 1900);
+  };
+  const persist = () => {
+    const state = {};
+    boxes.forEach(b => state[b.id] = b.checked);
+    fields.forEach(f => state[f.id] = f.value);
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+    updateProgress();
+  };
+  boxes.forEach(b => { b.checked = !!saved[b.id]; b.closest('li').classList.toggle('done', b.checked); b.addEventListener('change', () => { b.closest('li').classList.toggle('done', b.checked); persist(); }); });
+  fields.forEach(f => { if (typeof saved[f.id] === 'string') f.value = saved[f.id]; f.addEventListener('input', persist); });
+  function updateProgress() {
+    const done = boxes.filter(b => b.checked).length, total = boxes.length;
+    $('#progressText').textContent = `${done}/${total}`;
+    $('#progressBar').style.width = `${total ? done/total*100 : 0}%`;
+  }
+  updateProgress();
+
+  $$('.collapse-btn').forEach(btn => btn.addEventListener('click', () => {
+    const section = btn.closest('section'); section.classList.toggle('collapsed');
+    const collapsed = section.classList.contains('collapsed');
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    btn.textContent = collapsed ? '⌄ Expandir ponto' : '⌃ Recolher ponto';
+  }));
+
+  const sections = $$('section[id]');
+  let current = 0;
+  function goTo(index) {
+    current = Math.max(0, Math.min(sections.length - 1, index));
+    sections[current].scrollIntoView({behavior:'smooth', block:'start'});
+    sections[current].animate([{opacity:.65},{opacity:1}], {duration:350});
+  }
+  $('#prevBtn').addEventListener('click', () => goTo(current - 1));
+  $('#nextBtn').addEventListener('click', () => goTo(current + 1));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) current = sections.indexOf(entry.target); });
+  }, {rootMargin:'-25% 0px -55% 0px'});
+  sections.forEach(s => observer.observe(s));
+
+  $('#focusBtn').addEventListener('click', () => {
+    document.documentElement.classList.toggle('focus-mode');
+    $('#focusBtn').classList.toggle('active');
+    toast(document.documentElement.classList.contains('focus-mode') ? 'Modo foco ativado' : 'Modo completo ativado');
+  });
+  $('#printBtn').addEventListener('click', () => window.print());
+  $('#resetBtn').addEventListener('click', () => {
+    if (!confirm('Desmarcar todos os tópicos e apagar as notas salvas neste navegador?')) return;
+    boxes.forEach(b => { b.checked = false; b.closest('li').classList.remove('done'); });
+    fields.forEach(f => f.value = '');
+    try { localStorage.removeItem(KEY); } catch(e) {}
+    updateProgress(); toast('Esboço reiniciado');
+  });
+
+  let seconds = 0, interval = null;
+  function drawTimer() {
+    const m = String(Math.floor(seconds/60)).padStart(2,'0'), s = String(seconds%60).padStart(2,'0');
+    $('#timer').textContent = `${m}:${s}`;
+  }
+  $('#timerBtn').addEventListener('click', () => {
+    if (interval) {
+      clearInterval(interval); interval = null;
+      $('#timerBtn').firstChild.textContent = '▶ Continuar tempo ';
+      toast('Cronômetro pausado');
+    } else {
+      interval = setInterval(() => { seconds++; drawTimer(); }, 1000);
+      $('#timerBtn').firstChild.textContent = 'Ⅱ Pausar tempo ';
+      toast('Cronômetro iniciado');
+    }
+  });
+  drawTimer();
+})();
+</script>
+</body>
+</html>
