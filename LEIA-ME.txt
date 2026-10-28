@@ -1,24 +1,47 @@
-BIBLIOTECA PESSOAL DE MATERIAIS — PRIMEIRA VERSÃO
+BIBLIOTECA PESSOAL DE MATERIAIS — VERSÃO SIMPLIFICADA
 
-ESTRUTURA
-- index.html: página inicial da biblioteca
-- catalogo.json: registro de materiais planejados
-- esbocos/: esboços HTML
-- estudos-biblicos/: estudos bíblicos
-- apostilas/: apostilas e materiais de formação
-- modelos/: templates reutilizáveis
+ARQUIVOS PRINCIPAIS
+- index.html: página visual. Você normalmente não precisa mexer nele.
+- materiais.json: catálogo. É aqui que você cadastra os materiais.
+- esbocos/: arquivos HTML de pregações.
+- estudos-biblicos/: estudos.
+- apostilas/: apostilas e materiais de formação.
 
-TESTE LOCAL
-Abra index.html no navegador. A busca e o filtro funcionam. Os dois esboços listados ainda são marcadores de posição: coloque os arquivos reais nas pastas indicadas antes de publicar.
+COMO INSTALAR/ATUALIZAR NO GITHUB
+1. Abra o repositório https://github.com/TomxNani/biblioteca-pessoal-materiais
+2. Envie/substitua index.html e adicione materiais.json na raiz do repositório.
+3. Envie os arquivos de materiais para as pastas correspondentes (ou crie a pasta ao enviar um arquivo com o caminho no nome, se a interface permitir).
+4. Clique em Commit changes.
+5. Aguarde um ou dois minutos e recarregue https://tomxnani.github.io/biblioteca-pessoal-materiais/
 
-PUBLICAÇÃO POR LINK
-Caminho recomendado: GitHub Pages (site estático).
-1. Crie/acesse sua conta no GitHub.
-2. Crie um repositório público, por exemplo biblioteca-pessoal-materiais.
-3. Envie index.html, catalogo.json e as quatro pastas.
-4. Em Settings > Pages, configure publicação a partir da branch principal (root).
-5. Aguarde a publicação e teste o link gerado.
-A publicação será pública; não coloque dados pessoais, conteúdo privado ou materiais de terceiros sem autorização.
+COMO CADASTRAR UM NOVO MATERIAL (só precisa editar materiais.json)
+Copie um objeto dentro da lista "materiais", separe os objetos por vírgula e ajuste os campos:
+{
+  "titulo": "Título da pregação",
+  "categoria": "esbocos",
+  "texto_biblico": "Lucas 10:25-37",
+  "temas": "misericórdia, próximo, discipulado",
+  "descricao": "Breve descrição do material.",
+  "arquivo": "esbocos/titulo-do-arquivo.html"
+}
 
-ATUALIZAÇÃO
-Quando adicionar um arquivo, atualize o catálogo no index.html (lista `items`) e envie as alterações ao repositório. Esta versão ainda não possui painel de administração nem sincronização automática com Drive.
+CATEGORIAS PERMITIDAS
+- "esbocos"
+- "estudos-biblicos"
+- "apostilas"
+
+EXEMPLO PARA ESTUDO BÍBLICO
+{
+  "titulo": "Estudo — O Sermão do Monte",
+  "categoria": "estudos-biblicos",
+  "texto_biblico": "Mateus 5–7",
+  "temas": "Reino de Deus, ética, discipulado",
+  "descricao": "Estudo introdutório do Sermão do Monte.",
+  "arquivo": "estudos-biblicos/sermao-do-monte.html"
+}
+
+ATENÇÃO
+- O nome em "arquivo" deve corresponder exatamente ao caminho do arquivo enviado.
+- Os dois itens iniciais são marcadores de posição: o arquivo real ainda precisa ser enviado e o campo "arquivo" atualizado.
+- GitHub Pages é público: não envie informações pessoais, aconselhamento confidencial ou conteúdo protegido sem autorização.
+- Esta versão não possui painel administrativo; ela torna o cadastro mais simples ao concentrar os metadados em um único arquivo JSON.

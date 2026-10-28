@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -6,80 +6,84 @@
 <meta name="theme-color" content="#24113f">
 <title>Biblioteca Pessoal de Materiais</title>
 <style>
-:root{--ink:#191622;--muted:#6b6675;--purple:#6d28d9;--orange:#ea580c;--blue:#2563eb;--line:#e6e1ed;--paper:#fff;--soft:#f7f5fb}
-*{box-sizing:border-box}body{margin:0;background:#f4f2f7;color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.45}
-header{background:#24113f;color:white;padding:26px 18px 22px}header .wrap,main,.footer{max-width:980px;margin:auto}
-.kicker{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:#d8c8ff;font-weight:700}
-h1{font-size:clamp(1.7rem,5vw,2.7rem);line-height:1.05;margin:8px 0 10px;font-weight:900;letter-spacing:-.04em}
-header p{margin:0;color:#e9e2f5;max-width:620px}
-main{padding:18px 14px 44px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
-input,select,button{font:inherit;border-radius:10px;border:1px solid var(--line);padding:12px;background:white;color:var(--ink)}
-input{flex:1;min-width:190px}select{min-width:150px}
-button{cursor:pointer;font-weight:700}.primary{background:var(--purple);color:white;border-color:var(--purple)}.small{padding:8px 10px;font-size:.88rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:17px;display:flex;flex-direction:column;gap:9px;min-height:200px;box-shadow:0 3px 12px #2613430a}
-.tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--purple)}
-.card h2{font-size:1.15rem;line-height:1.2;margin:0}.card p{font-size:.93rem;color:var(--muted);margin:0;flex:1}
-.card .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px}
-.open{background:#f1eafe;border-color:#dfd0ff;color:#4c1d95}
-.section-title{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:22px 0 12px}.section-title h2{font-size:1.15rem;margin:0}.section-title span{font-size:.85rem;color:var(--muted)}
-.notice{background:#fff7ed;border-left:4px solid var(--orange);padding:13px 14px;border-radius:8px;margin:16px 0;color:#7c2d12;font-size:.92rem}
-.empty{padding:28px;text-align:center;color:var(--muted);background:white;border:1px dashed #cfc6db;border-radius:12px}
-footer{padding:20px 14px 28px;color:var(--muted);font-size:.82rem;text-align:center}
-@media(min-width:700px){header{padding:36px 24px 30px}main{padding:24px 20px 48px}}
+:root{--ink:#1d1825;--muted:#6e6878;--purple:#6d28d9;--orange:#ea580c;--blue:#2563eb;--line:#e7e1ef;--soft:#f6f3fa;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--soft);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+header{background:#24113f;color:#fff;padding:30px 18px 26px}header .wrap,main,footer{max-width:1000px;margin:auto}
+.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:#d9c9ff}
+h1{font-size:clamp(1.8rem,5vw,3rem);line-height:1.04;letter-spacing:-.04em;margin:10px 0;font-weight:900}
+header p{margin:0;color:#e8e0f2;max-width:650px}
+main{padding:22px 14px 44px}
+.topline{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+h2{font-size:1.2rem;margin:0}
+.count{color:var(--muted);font-size:.88rem}
+.filters{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px}
+input,select{width:100%;padding:13px 14px;border:1px solid #dcd4e8;border-radius:11px;background:#fff;color:var(--ink);font:inherit}
+input:focus,select:focus{outline:3px solid #d9c8ff;border-color:var(--purple)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:13px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:15px;padding:17px;display:flex;flex-direction:column;min-height:225px;box-shadow:0 4px 14px #21113708}
+.tag{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:900;color:var(--purple);margin-bottom:8px}
+.card h3{font-size:1.18rem;line-height:1.22;margin:0 0 9px}
+.meta{font-size:.85rem;color:#4f3b70;font-weight:700;margin-bottom:8px}
+.card p{font-size:.94rem;color:var(--muted);margin:0 0 12px;flex:1}
+.topics{font-size:.82rem;color:var(--muted);margin-bottom:13px}
+.link{display:inline-block;text-decoration:none;text-align:center;background:#efe8fb;color:#4c1d95;border:1px solid #e0d1fa;border-radius:10px;padding:10px 12px;font-weight:800;font-size:.9rem}
+.link.disabled{background:#f4f1f7;color:#777180;border-color:#e5e0eb}
+.empty,.error{background:white;border:1px dashed #cfc4df;border-radius:13px;padding:26px;text-align:center;color:var(--muted)}
+.note{margin-top:20px;background:#fff7ed;border-left:4px solid var(--orange);border-radius:8px;padding:13px 14px;color:#7c2d12;font-size:.9rem}
+footer{padding:22px 14px 32px;text-align:center;color:var(--muted);font-size:.82rem}
+@media(min-width:650px){header{padding:40px 24px 34px}main{padding:28px 20px 48px}.filters{grid-template-columns:2fr 1fr}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-<div class="kicker">Acervo pessoal · Teologia e ministério</div>
+<div class="eyebrow">Acervo pessoal · Teologia e ministério</div>
 <h1>Biblioteca Pessoal<br>de Materiais</h1>
-<p>Um lugar para organizar esboços de pregação, estudos bíblicos e apostilas — com acesso simples pelo celular, tablet ou computador.</p>
+<p>Esboços de pregação, estudos bíblicos e apostilas organizados em um só lugar.</p>
 </div></header>
 <main>
-<div class="section-title"><h2>Meu acervo</h2><span id="count">5 itens iniciais</span></div>
-<div class="toolbar">
-<input id="search" type="search" placeholder="Buscar por título, texto bíblico ou tema…" aria-label="Buscar materiais">
+<div class="topline"><h2>Meu acervo</h2><span class="count" id="count">Carregando materiais…</span></div>
+<div class="filters">
+<input id="search" type="search" placeholder="Buscar por título, tema ou texto bíblico…" aria-label="Buscar materiais">
 <select id="category" aria-label="Filtrar categoria">
-<option value="todos">Todas as categorias</option><option value="esbocos">Esboços</option><option value="estudos-biblicos">Estudos bíblicos</option><option value="apostilas">Apostilas</option><option value="modelos">Modelos</option>
+<option value="todos">Todas as categorias</option>
+<option value="esbocos">Esboços de pregação</option>
+<option value="estudos-biblicos">Estudos bíblicos</option>
+<option value="apostilas">Apostilas</option>
 </select>
 </div>
-<div id="cards" class="grid"></div>
-<div class="notice"><strong>Primeiro passo:</strong> esta é a estrutura inicial da biblioteca. Os cartões são exemplos e pastas de organização; os materiais reais serão adicionados à medida que colocarmos seus arquivos nas pastas correspondentes.</div>
-<div class="section-title"><h2>Como adicionar materiais</h2><span>Guia rápido</span></div>
-<div class="grid">
-<article class="card"><div class="tag">01 · Guardar</div><h2>Coloque o arquivo na pasta certa</h2><p>Use as pastas <strong>esbocos</strong>, <strong>estudos-biblicos</strong>, <strong>apostilas</strong> ou <strong>modelos</strong> dentro desta biblioteca.</p></article>
-<article class="card"><div class="tag">02 · Cadastrar</div><h2>Atualize o catálogo</h2><p>Abra o arquivo <strong>catalogo.json</strong> e registre título, categoria, descrição e caminho relativo do material.</p></article>
-<article class="card"><div class="tag">03 · Publicar</div><h2>Publique a pasta</h2><p>Envie o conteúdo para um repositório do GitHub e ative o GitHub Pages. O endereço público abrirá esta página e os arquivos vinculados.</p></article>
-</div>
+<div id="cards" class="grid"><div class="empty">Carregando catálogo…</div></div>
+<div class="note"><strong>Para adicionar um material:</strong> envie o arquivo para a pasta correspondente e acrescente uma entrada em <code>materiais.json</code>. O guia LEIA-ME explica como fazer isso sem editar esta página.</div>
 </main>
-<footer>Biblioteca pessoal · Versão inicial · Estrutura preparada para publicação estática</footer>
+<footer>Biblioteca pessoal · Atualizada pelo catálogo de materiais</footer>
 <script>
-const items = [
- {title:"Esboço — Salmo 23",category:"esbocos",description:"Modelo inicial de esboço interativo para pregação.",path:"esbocos/esboco_salmo_23.html",status:"Preparar arquivo"},
- {title:"Esboço — Fé permanece no vale",category:"esbocos",description:"Esboço interativo com navegação e notas, a integrar à biblioteca.",path:"esbocos/esboco_fe_permanece_no_vale.html",status:"Adicionar arquivo"},
- {title:"Estudos bíblicos",category:"estudos-biblicos",description:"Espaço para estudos por livro, passagem ou tema.",path:"estudos-biblicos/",status:"Pasta"},
- {title:"Apostilas",category:"apostilas",description:"Materiais formativos, aulas e conteúdos de capacitação.",path:"apostilas/",status:"Pasta"},
- {title:"Modelos de materiais",category:"modelos",description:"Templates reutilizáveis para novos esboços e estudos.",path:"modelos/",status:"Pasta"}
-];
-const names={"esbocos":"Esboços","estudos-biblicos":"Estudos bíblicos","apostilas":"Apostilas","modelos":"Modelos"};
-const cards=document.getElementById("cards"), search=document.getElementById("search"), category=document.getElementById("category");
+const labels={"esbocos":"Esboço de pregação","estudos-biblicos":"Estudo bíblico","apostilas":"Apostila"};
+let items=[];
+const cards=document.getElementById("cards"),search=document.getElementById("search"),category=document.getElementById("category");
+function make(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e}
 function render(){
- const q=search.value.trim().toLocaleLowerCase("pt-BR"), cat=category.value;
- const shown=items.filter(x=>(cat==="todos"||x.category===cat)&&[x.title,x.description,x.category].join(" ").toLocaleLowerCase("pt-BR").includes(q));
- document.getElementById("count").textContent=shown.length+" "+(shown.length===1?"item":"itens");
- cards.innerHTML="";
- if(!shown.length){cards.innerHTML='<div class="empty">Nenhum material encontrado. Tente outra busca ou categoria.</div>';return;}
- shown.forEach(x=>{
-  const el=document.createElement("article");el.className="card";
-  const tag=document.createElement("div");tag.className="tag";tag.textContent=names[x.category]||x.category;
-  const h=document.createElement("h2");h.textContent=x.title;
-  const p=document.createElement("p");p.textContent=x.description;
-  const actions=document.createElement("div");actions.className="actions";
-  const a=document.createElement("a");a.className="open";a.style.cssText="display:inline-block;text-decoration:none;padding:9px 11px;border-radius:9px;font-size:.88rem;font-weight:700";a.href=x.path;a.textContent=x.status==="Pasta"?"Abrir pasta":"Abrir material";
-  if(x.status==="Preparar arquivo"||x.status==="Adicionar arquivo"){a.href="#";a.addEventListener("click",e=>{e.preventDefault();alert("Este material ainda precisa ser colocado na pasta indicada e cadastrado para publicação.");});}
-  actions.appendChild(a);el.append(tag,h,p,actions);cards.appendChild(el);
+ const q=search.value.trim().toLocaleLowerCase("pt-BR"),cat=category.value;
+ const visible=items.filter(x=>(cat==="todos"||x.categoria===cat)&&[x.titulo,x.descricao,x.texto_biblico,x.temas,(x.temas_lista||[]).join(" ")].join(" ").toLocaleLowerCase("pt-BR").includes(q));
+ document.getElementById("count").textContent=visible.length+" "+(visible.length===1?"material":"materiais");
+ cards.replaceChildren();
+ if(!visible.length){cards.append(make("div","empty","Nenhum material encontrado. Tente outra busca ou categoria."));return}
+ visible.forEach(x=>{
+  const card=make("article","card"),tag=make("div","tag",labels[x.categoria]||x.categoria||"Material");
+  card.append(tag,make("h3","",x.titulo||"Material sem título"));
+  if(x.texto_biblico)card.append(make("div","meta","Texto bíblico: "+x.texto_biblico));
+  card.append(make("p","",x.descricao||"Sem descrição."));
+  if(x.temas||x.temas_lista)card.append(make("div","topics","Temas: "+(x.temas||x.temas_lista.join(", "))));
+  const href=(x.arquivo||"").trim();
+  if(href && href!=="#"){
+   const a=make("a","link","Abrir material");a.href=href;card.append(a);
+  }else{
+   const a=make("span","link disabled","Arquivo ainda não adicionado");card.append(a);
+  }
+  cards.append(card);
  });
 }
-search.addEventListener("input",render);category.addEventListener("change",render);render();
+fetch("./materiais.json").then(r=>{if(!r.ok)throw Error("Não foi possível carregar materiais.json");return r.json()})
+.then(data=>{items=Array.isArray(data)?data:(data.materiais||[]);render()})
+.catch(()=>{document.getElementById("count").textContent="Catálogo não carregado";cards.replaceChildren(make("div","error","Não consegui abrir materiais.json. Confira se esse arquivo está na raiz do repositório e se o nome está correto."));});
+search.addEventListener("input",render);category.addEventListener("change",render);
 </script>
 </body></html>

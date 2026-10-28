@@ -1,0 +1,1 @@
+Coloque nesta pasta os arquivos HTML/PDF desta categoria. Depois atualize materiais.json com o caminho correto.

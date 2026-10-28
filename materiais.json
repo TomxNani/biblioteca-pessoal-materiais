@@ -1,0 +1,20 @@
+{
+  "materiais": [
+    {
+      "titulo": "Esboço — Salmo 23",
+      "categoria": "esbocos",
+      "texto_biblico": "Salmo 23",
+      "temas": "confiança, cuidado de Deus, pastoreio",
+      "descricao": "Espaço reservado para o esboço de Salmo 23. Atualize o caminho quando enviar o arquivo real.",
+      "arquivo": "#"
+    },
+    {
+      "titulo": "Fé permanece no vale",
+      "categoria": "esbocos",
+      "texto_biblico": "Salmo 23",
+      "temas": "fé, sofrimento, perseverança",
+      "descricao": "Cadastrar o arquivo HTML real deste esboço para disponibilizá-lo aqui.",
+      "arquivo": "#"
+    }
+  ]
+}
