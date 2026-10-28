@@ -1,0 +1,20 @@
+{
+  "biblioteca": "Biblioteca Pessoal de Materiais",
+  "instrucoes": "Adicione materiais às pastas e registre cada um neste catálogo. Os caminhos devem ser relativos a index.html.",
+  "materiais": [
+    {
+      "titulo": "Esboço — Salmo 23",
+      "categoria": "esbocos",
+      "descricao": "Modelo inicial de esboço interativo para pregação.",
+      "arquivo": "esbocos/esboco_salmo_23.html",
+      "status": "pendente"
+    },
+    {
+      "titulo": "Esboço — Fé permanece no vale",
+      "categoria": "esbocos",
+      "descricao": "Esboço interativo previamente criado; adicionar o arquivo real.",
+      "arquivo": "esbocos/esboco_fe_permanece_no_vale.html",
+      "status": "pendente"
+    }
+  ]
+}

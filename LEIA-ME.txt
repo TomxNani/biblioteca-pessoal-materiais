@@ -1,0 +1,24 @@
+BIBLIOTECA PESSOAL DE MATERIAIS — PRIMEIRA VERSÃO
+
+ESTRUTURA
+- index.html: página inicial da biblioteca
+- catalogo.json: registro de materiais planejados
+- esbocos/: esboços HTML
+- estudos-biblicos/: estudos bíblicos
+- apostilas/: apostilas e materiais de formação
+- modelos/: templates reutilizáveis
+
+TESTE LOCAL
+Abra index.html no navegador. A busca e o filtro funcionam. Os dois esboços listados ainda são marcadores de posição: coloque os arquivos reais nas pastas indicadas antes de publicar.
+
+PUBLICAÇÃO POR LINK
+Caminho recomendado: GitHub Pages (site estático).
+1. Crie/acesse sua conta no GitHub.
+2. Crie um repositório público, por exemplo biblioteca-pessoal-materiais.
+3. Envie index.html, catalogo.json e as quatro pastas.
+4. Em Settings > Pages, configure publicação a partir da branch principal (root).
+5. Aguarde a publicação e teste o link gerado.
+A publicação será pública; não coloque dados pessoais, conteúdo privado ou materiais de terceiros sem autorização.
+
+ATUALIZAÇÃO
+Quando adicionar um arquivo, atualize o catálogo no index.html (lista `items`) e envie as alterações ao repositório. Esta versão ainda não possui painel de administração nem sincronização automática com Drive.
